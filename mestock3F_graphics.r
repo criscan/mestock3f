@@ -5,20 +5,14 @@ source('por_recluta_r.R')
 library(areaplot)
 
 
-# Nombre de las 3 flotas y la Bacuaña
+# Asigne nombre de las 3 flotas y la Bacuaña
 
-#nF1="Arrastre"
-#nF2="Palangre"
-#nF3="Espinel"
-#nF4="Campaña"  
-#name="reineta"
+nF1="Arrastre"
+nF2="Palangre"
+nF3="Espinel"
+nF4="Campaña"  
+name="mestock3f"  #nombre del archivo de datos
 
-
-nF1="OTB"
-nF2="LLS"
-nF3="GNS"
-nF4="MEDITS"  
-name="Hake6_2"
 
 system(paste('mestock3F -ind ',name,'.dat -nox',sep=""))  # for model running
 shell(paste('copy for_R.rep ',name,'.rep',sep=""))  # for model running
