@@ -535,15 +535,6 @@ FUNCTION Eval_selectividad
        }
    }
 
-   for (i=1;i<=ntime;i++){
-
-   Sela(i)=Sela(i)/max(Sela(i));
-   Selp(i)=Selp(i)/max(Selp(i));
-   Sele(i)=Sele(i)/max(Sele(i));
-   Sel_cru(i)=Sel_cru(i)/max(Sel_cru(i));
-
-   }
-
 
 
 FUNCTION Eval_mortalidades
