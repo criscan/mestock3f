@@ -172,7 +172,7 @@ DATA_SECTION
  init_number  pbr_tar // PBR pivote
 
  init_vector pbr(1,npbr)
- init_int ntime_sim //Años_a_proyectar
+ init_int ntime_sim //AÃ±os_a_proyectar
 
 
 INITIALIZATION_SECTION
@@ -218,7 +218,7 @@ PARAMETER_SECTION
  init_vector log_Fp(1,ntime,opt_Fp) // log  mortalidad por pesca por flota
  init_vector log_Fe(1,ntime,opt_Fe) // log  mortalidad por pesca por flota
 
-// Parámetros biológicos
+// ParÃ¡metros biolÃ³gicos
  init_number log_Loo(fase_Loo)
  init_number log_k(fase_k)
  init_number log_L0(fase_L0)
@@ -227,7 +227,7 @@ PARAMETER_SECTION
  init_number log_M(fase_M)
  init_number log_h(fase_h)
 
-// selectividad paramétrica a la edad
+// selectividad paramÃ©trica a la edad
  init_vector log_L50a(1,nbloques_1,fase_parsel1_1)
  init_vector log_sigma1a(1,nbloques_1,fase_parsel1_2)
  init_vector log_sigma2a(1,nbloques_1,fase_parsel1_3)
@@ -416,7 +416,7 @@ PRELIMINARY_CALCS_SECTION
 
 
   Unos_edades=1;// lo uso en operaciones matriciales con edades
-  Unos_year=1;// lo uso en operaciones matriciales con el año
+  Unos_year=1;// lo uso en operaciones matriciales con el aÃ±o
 
   Wmed=exp(lnaw)*pow(Tallas,bw);
   rango=L95ms-L50ms;
@@ -535,6 +535,15 @@ FUNCTION Eval_selectividad
        }
    }
 
+   for (i=1;i<=ntime;i++){
+
+   Sela(i)=Sela(i)/max(Sela(i));
+   Selp(i)=Selp(i)/max(Selp(i));
+   Sele(i)=Sele(i)/max(Sele(i));
+   Sel_cru(i)=Sel_cru(i)/max(Sel_cru(i));
+
+   }
+
 
 
 FUNCTION Eval_mortalidades
@@ -575,8 +584,8 @@ FUNCTION Eval_abundancia
   alfa_sr=4*h*mfexp(log_Rmed)/(5*h-1);//
   beta_sr=(1-h)*SSBo/(5*h-1);// Reclutamiento
 
- // -----------------primer año 
- // Condición inicial año 1 en equilibrio en torno a Z y R
+ // -----------------primer aÃ±o 
+ // CondiciÃ³n inicial aÃ±o 1 en equilibrio en torno a Z y R
     N(1,1)=mfexp(log_Rmed+log_desv_Rt(1));
     for (int j=2;j<=nedades;j++)
     {N(1,j)=N(1,j-1)*mfexp(-1.*Z(1,j-1));}
@@ -635,13 +644,13 @@ FUNCTION Eval_biomasas
 FUNCTION Eval_capturas_predichas
 
 
-// matrices de capturas predichas por talla y año
+// matrices de capturas predichas por talla y aÃ±o
  pred_Carr=elem_prod(elem_div(Farr,Z),elem_prod(1-S,N))*Prob_talla;
  pred_Cpal=elem_prod(elem_div(Fpal,Z),elem_prod(1-S,N))*Prob_talla;
  pred_Cesp=elem_prod(elem_div(Fesp,Z),elem_prod(1-S,N))*Prob_talla;
 
 
-// vectores de desembarques predichos por año
+// vectores de desembarques predichos por aÃ±o
  pred_Yarr=pred_Carr*Wmed;
  pred_Ypal=pred_Cpal*Wmed;
  pred_Yesp=pred_Cesp*Wmed;
@@ -773,7 +782,7 @@ FUNCTION Eval_funcion_objetivo
  likeval(11)=suma8;//
 
 
- //Priors de parámetros y procesos
+ //Priors de parÃ¡metros y procesos
  
  penalty(1)=1./(2*square(sigmaR))*(norm2(log_desv_Rt));
 
@@ -814,7 +823,7 @@ FUNCTION  Eval_Proyeccion
   Sp=S(ntime);
   Bref=BD(ntime);
 
-   for (int j=1;j<=ntime_sim;j++){ // ciclo de años
+   for (int j=1;j<=ntime_sim;j++){ // ciclo de aÃ±os
 
     plus=Np(nedades)*Sp(nedades);
     if(j<=minedad){
