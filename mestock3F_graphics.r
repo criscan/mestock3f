@@ -439,6 +439,14 @@ polygon(x,y,col="#DCDCDC",border="#DCDCDC")
 
 lines(Yrs,Ftot,lwd=2)
 lines(Yrs,Ftar_vec, col = "red",lty = 2,lwd=2)
+
+for (i in 1:length(Yrs))
+{ 
+  F_F1[i]=max(Fa_F1[i,])
+  F_F2[i]=max(Fa_F2[i,])
+  F_F3[i]=max(Fa_F3[i,])
+}
+
 lines(Yrs,F_F1, col = "blue")
 lines(Yrs,F_F2, col = "green")
 lines(Yrs,F_F3, col = "brown")
